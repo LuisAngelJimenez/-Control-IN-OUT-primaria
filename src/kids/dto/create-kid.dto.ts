@@ -1,3 +1,4 @@
+import { Type } from "class-transformer"
 import { IsDate, IsInt, IsNumber, IsPositive, IsString, MinLength } from "class-validator"
 import { Group } from "src/groups/entities/group.entity"
 import { Tutor } from "src/tutors/entities/tutor.entity"
@@ -19,5 +20,6 @@ export class CreateKidDto {
    @IsNumber()
    tutor: Tutor
    @IsDate()
+   @Type(() => Date)
    birthdate: Date
 }

@@ -1,6 +1,7 @@
-import { Column } from "typeorm";
+import { IsString, MinLength } from "class-validator";
 
 export class CreateGroupDto {
-    @Column()
+    @MinLength(3)
+    @IsString()
     name: string;
 }

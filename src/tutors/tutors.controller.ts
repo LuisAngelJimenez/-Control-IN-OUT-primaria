@@ -26,6 +26,11 @@ export class TutorsController {
   update(@Param('id') id: string, @Body() updateTutorDto: UpdateTutorDto) {
     return this.tutorsService.update(+id, updateTutorDto);
   }
+  
+  @Patch(':id/active')
+  active(@Param('id') id: string) {
+    return this.tutorsService.active(+id);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

@@ -16,7 +16,7 @@ export class Kid {
     group: Group;
     @ManyToOne(()=>Tutor, tutor => tutor.kid)
     tutor: Tutor;
-    @Column()
+    @Column({ type: 'date' })
     birthdate: Date;
     @Column({
         default:true

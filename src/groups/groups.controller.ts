@@ -27,6 +27,10 @@ export class GroupsController {
     return this.groupsService.update(+id, updateGroupDto);
   }
 
+  @Patch(':id/active')
+  active(@Param('id') id: string) {
+    return this.groupsService.active(+id);
+  }
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.groupsService.remove(+id);

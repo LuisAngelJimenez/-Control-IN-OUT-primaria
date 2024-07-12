@@ -7,8 +7,10 @@ export class Group {
     id: number;
     @Column()
     name: string;
-    @Column()
-    is_active: string;
+    @Column({
+        default:true
+    })
+    is_active:boolean
     @OneToMany(()=> Kid, alumno => alumno.group)
     kid: Kid[];
 }

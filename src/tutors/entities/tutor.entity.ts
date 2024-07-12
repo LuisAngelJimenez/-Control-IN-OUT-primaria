@@ -11,7 +11,7 @@ export class Tutor {
     flastname: string;
     @Column()
     slastname: string;
-    @Column()
+    @Column({ type: 'date' })
     birthdate: Date;
     @Column()
     phone: string;

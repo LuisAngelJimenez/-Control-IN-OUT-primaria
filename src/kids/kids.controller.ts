@@ -27,6 +27,11 @@ export class KidsController {
     return this.kidsService.update(+id, updateKidDto);
   }
 
+  @Patch(':id/active')
+  active(@Param('id') id: string) {
+    return this.kidsService.active(+id);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.kidsService.remove(+id);

@@ -20,7 +20,7 @@ import { Tutor } from './tutors/entities/tutor.entity';
     autoLoadEntities:true,
     synchronize: true,
     entities: [Group, Kid, Tutor],
-}),KidsModule, GroupsModule, TutorsModule],
+}), KidsModule, GroupsModule, TutorsModule],
   controllers: [AppController],
   providers: [AppService],
 })

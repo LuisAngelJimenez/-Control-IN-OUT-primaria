@@ -1,3 +1,4 @@
+import { Type } from "class-transformer"
 import { IsDate, IsEmail, IsNumber, IsPhoneNumber, IsPositive, IsPostalCode, IsString, MinLength } from "class-validator"
 
 export class CreateTutorDto {
@@ -11,8 +12,10 @@ export class CreateTutorDto {
    @IsString()
    slastname:string
    @IsDate()
+   @Type(() => Date)
    birthdate: Date
-   @IsPhoneNumber()
+   @IsString()
+   @MinLength(10)
    phone: string
    @IsEmail()
    email?: string
