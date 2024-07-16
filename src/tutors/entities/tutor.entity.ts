@@ -32,7 +32,7 @@ export class Tutor {
     @Column({default: true})
     is_active: boolean;
     @Column()
-    image?: string;
+    img: string;
     @OneToMany(()=> Kid, hijos => hijos.tutor)
     kid: Kid[];
 }
