@@ -5,6 +5,26 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { NinosModule } from './ninos/ninos.module';
 
 @Module({
+import { KidsModule } from './kids/kids.module';
+import { GroupsModule } from './groups/groups.module';
+import { TutorsModule } from './tutors/tutors.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Group } from './groups/entities/group.entity';
+import { Kid } from './kids/entities/kid.entity';
+import { Tutor } from './tutors/entities/tutor.entity';
+
+@Module({
+  imports: [TypeOrmModule.forRoot({
+    type:'mysql',
+    host: 'localhost',
+    port: 3306,
+    username:'root',
+    password:'',
+    database:'in_out',
+    autoLoadEntities:true,
+    synchronize: true,
+    entities: [Group, Kid, Tutor],
+}), KidsModule, GroupsModule, TutorsModule],
   controllers: [AppController],
   providers: [AppService],
   imports: [TypeOrmModule.forRoot({
