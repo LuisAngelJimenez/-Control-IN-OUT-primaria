@@ -24,6 +24,7 @@ export class CreateTutorDto {
    curp: string
    @IsPositive()
    @IsNumber()
+   @Type(() => Number)
    number: number
    @IsString()
    street: string
@@ -33,6 +34,8 @@ export class CreateTutorDto {
    city: string
    @IsNumber()
    @IsPositive()
-   @MinLength(5)
+   @Type(() => Number)
    zip: number
+   @IsString()
+   img: string
 }
