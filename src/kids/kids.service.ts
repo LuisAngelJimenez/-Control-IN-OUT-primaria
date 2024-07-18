@@ -4,16 +4,20 @@ import { UpdateKidDto } from './dto/update-kid.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Kid } from './entities/kid.entity';
 import { Repository } from 'typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class KidsService {
   constructor(
     @InjectRepository(Kid)
-    private kidRepo: Repository<Kid>
+    private kidRepo: Repository<Kid>,
+    private CloudinaryService: CloudinaryService
   ){}
-  async create(createKidDto: CreateKidDto) {
+  async create(createKidDto: CreateKidDto, file: Express.Multer.File, folder: string) {
     try{
-      const kid = this.kidRepo.create(createKidDto);
+      const uploadImage = await this.CloudinaryService.uploadFile(file, folder);
+      const imageUrl = uploadImage.url;
+      const kid = this.kidRepo.create({ ...createKidDto, img: imageUrl});
       await this.kidRepo.save(kid);
       return kid;
     }

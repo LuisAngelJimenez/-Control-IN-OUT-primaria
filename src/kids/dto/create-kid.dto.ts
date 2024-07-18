@@ -15,11 +15,15 @@ export class CreateKidDto {
    slastname:string
    @IsPositive()
    @IsNumber()
+   @Type(() => Number)
    group: Group
    @IsPositive()
    @IsNumber()
+   @Type(() => Number)
    tutor: Tutor
    @IsDate()
    @Type(() => Date)
    birthdate: Date
+   @IsString()
+   img: string
 }

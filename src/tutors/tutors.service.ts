@@ -13,9 +13,9 @@ export class TutorsService {
     private tutorRepo: Repository<Tutor>,
     private CloudinaryService: CloudinaryService,
   ){}
-  async create(createTutorDto: CreateTutorDto, file: Express.Multer.File) {
+  async create(createTutorDto: CreateTutorDto, file: Express.Multer.File, folder: string) {
     try{
-      const uploadImage = await this.CloudinaryService.uploadFile(file);
+      const uploadImage = await this.CloudinaryService.uploadFile(file, folder);
       const imageUrl = uploadImage.url;
       const tutor = this.tutorRepo.create({ ...createTutorDto, img: imageUrl});
       await this.tutorRepo.save(tutor);

@@ -7,9 +7,9 @@ import { CloudinaryService } from './cloudinary/cloudinary.service';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly cloudinaryServices: CloudinaryService,
+    //private readonly cloudinaryServices: CloudinaryService,
   ) {}
-
+/* 
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadImage(
@@ -22,7 +22,7 @@ export class AppController {
       })
     ) file: Express.Multer.File,){
       return this.cloudinaryServices.uploadFile(file);
-    }
+    } */
 
   @Get()
   getHello(): string {

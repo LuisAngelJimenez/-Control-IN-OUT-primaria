@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, HttpCode, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, HttpCode, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, BadRequestException } from '@nestjs/common';
 import { TutorsService } from './tutors.service';
 import { CreateTutorDto } from './dto/create-tutor.dto';
 import { UpdateTutorDto } from './dto/update-tutor.dto';
@@ -11,8 +11,18 @@ export class TutorsController {
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   @HttpCode(201)
-  create(@Body() createTutorDto: CreateTutorDto, @UploadedFile() file: Express.Multer.File) {
-    return this.tutorsService.create(createTutorDto, file);
+  create(@Body() createTutorDto: CreateTutorDto, @Body('folder') folder: string, @UploadedFile(
+    new ParseFilePipe({
+      validators: [
+        new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 4 }), 
+        new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }), 
+      ],
+    }),
+  ) file: Express.Multer.File) {
+    if (!folder) {
+      throw new BadRequestException('Folder not specified')
+    }
+    return this.tutorsService.create(createTutorDto, file, folder);
   }
 
   @Get()

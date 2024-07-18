@@ -23,5 +23,5 @@ export class Kid {
     })
     is_active:boolean
     @Column()
-    image?: string;
+    img: string;
 }
