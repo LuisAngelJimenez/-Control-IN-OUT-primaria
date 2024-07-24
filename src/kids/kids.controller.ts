@@ -18,11 +18,12 @@ export class KidsController {
         new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }), 
       ],
     }),
-  ) file: Express.Multer.File) {
+  ) file: Express.Multer.File,
+  @Body('tutorId') tutorId?: number) {
     if (!folder) {
       throw new BadRequestException('Folder is required');
     }
-    return this.kidsService.create(createKidDto, file, folder);
+    return this.kidsService.create(createKidDto, file, folder, tutorId);
   }
 
   @Get()
@@ -36,8 +37,8 @@ export class KidsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateKidDto: UpdateKidDto) {
-    return this.kidsService.update(+id, updateKidDto);
+  update(@Param('id') id: string, @Body() updateKidDto: UpdateKidDto, @Body('tutorId') tutorId?: number) {
+    return this.kidsService.update(+id, updateKidDto, tutorId);
   }
 
   @Patch(':id/active')

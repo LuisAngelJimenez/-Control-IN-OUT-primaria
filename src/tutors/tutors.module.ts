@@ -8,6 +8,7 @@ import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 @Module({
   controllers: [TutorsController],
   providers: [TutorsService, CloudinaryService],
-  imports: [TypeOrmModule.forFeature([Tutor])]
+  imports: [TypeOrmModule.forFeature([Tutor])],
+  exports: [TutorsService]
 })
 export class TutorsModule {}
