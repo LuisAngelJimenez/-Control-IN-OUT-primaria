@@ -1,5 +1,5 @@
 import { Kid } from "src/kids/entities/kid.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Tutor {
@@ -32,7 +32,12 @@ export class Tutor {
     @Column({default: true})
     is_active: boolean;
     @Column()
-    image?: string;
-    @OneToMany(()=> Kid, hijos => hijos.tutor)
+    img: string;
+    @ManyToMany(() => Kid, kid => kid.tutor)
+    @JoinTable({
+        name: 'kid_tutor',
+        joinColumns: [{ name: 'id_tutor' }],
+        inverseJoinColumns: [{ name: 'id_kid' }],
+    })
     kid: Kid[];
 }

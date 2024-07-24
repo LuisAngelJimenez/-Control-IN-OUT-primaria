@@ -4,18 +4,21 @@ import { UpdateTutorDto } from './dto/update-tutor.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tutor } from './entities/tutor.entity';
 import { Repository } from 'typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
 
 @Injectable()
 export class TutorsService {
   constructor(
     @InjectRepository(Tutor)
-    private tutorRepo: Repository<Tutor>){}
-  async create(createTutorDto: CreateTutorDto) {
+    private tutorRepo: Repository<Tutor>,
+    private CloudinaryService: CloudinaryService,
+  ){}
+  async create(createTutorDto: CreateTutorDto, file: Express.Multer.File, folder: string) {
     try{
-      const tutor = this.tutorRepo.create(createTutorDto);
+      const uploadImage = await this.CloudinaryService.uploadFile(file, folder);
+      const imageUrl = uploadImage.url;
+      const tutor = this.tutorRepo.create({ ...createTutorDto, img: imageUrl});
       await this.tutorRepo.save(tutor);
-      console.log(`${tutor.zip}`.length)
-      console.log(`${tutor.curp}`.length)
       return tutor;
     }
     catch(error){

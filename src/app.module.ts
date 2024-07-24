@@ -15,6 +15,7 @@ import { EmployeModule } from './employe/employe.module';
 import { Recolection } from './recolections/entities/recolection.entity';
 import { Employe } from './employe/entities/employe.entity';
 
+
 @Module({
   imports: [TypeOrmModule.forRoot({
     type:'mysql',
@@ -27,6 +28,7 @@ import { Employe } from './employe/entities/employe.entity';
     synchronize: true,
     entities: [Group, Kid, Tutor, Recolection, Employe],
 }), KidsModule, GroupsModule, TutorsModule, RecolectionsModule, EmployeModule],
+
   controllers: [AppController],
   providers: [AppService],
 })

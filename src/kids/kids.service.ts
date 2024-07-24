@@ -4,16 +4,28 @@ import { UpdateKidDto } from './dto/update-kid.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Kid } from './entities/kid.entity';
 import { Repository } from 'typeorm';
+import { CloudinaryService } from 'src/cloudinary/cloudinary.service';
+import { Tutor } from 'src/tutors/entities/tutor.entity';
+import { TutorsService } from 'src/tutors/tutors.service';
 
 @Injectable()
 export class KidsService {
   constructor(
     @InjectRepository(Kid)
-    private kidRepo: Repository<Kid>
+    private kidRepo: Repository<Kid>,
+    private CloudinaryService: CloudinaryService,
+    private tutorsService: TutorsService
   ){}
-  async create(createKidDto: CreateKidDto) {
+  async create(createKidDto: CreateKidDto, file: Express.Multer.File, folder: string, tutorId: number) {
     try{
-      const kid = this.kidRepo.create(createKidDto);
+      const uploadImage = await this.CloudinaryService.uploadFile(file, folder);
+      const imageUrl = uploadImage.url;
+      const tutor = await this.tutorsService.findOne(tutorId);
+      if (!tutor) {
+        throw new Error('Tutor not found');
+      }
+      const kid = this.kidRepo.create({ ...createKidDto, img: imageUrl, tutor: [tutor]});
+
       await this.kidRepo.save(kid);
       return kid;
     }
@@ -51,12 +63,14 @@ export class KidsService {
     }
   }
 
-  async update(id: number, updateKidDto: UpdateKidDto) {
+  async update(id: number, updateKidDto: UpdateKidDto, tutorId: number) {
     try{
-      const kid = await this.kidRepo.preload({
-        id,
-        ...updateKidDto
-      });
+      const tutor = await this.tutorsService.findOne(tutorId);
+      if (!tutor) {
+        throw new Error('Tutor not found');
+      }
+      const kid = await this.kidRepo.preload({ id, ...updateKidDto, tutor: [tutor] });
+      
       await this.kidRepo.save(kid);
       return kid
     }
