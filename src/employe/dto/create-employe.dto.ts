@@ -40,4 +40,7 @@ export class CreateEmployeDto {
   @IsNumberString()
   @Length(5, 5)
   zip: string;  // Limitar a exactamente 5 caracteres numéricos
+
+  @IsString()
+  rol:string;
 }

@@ -22,7 +22,7 @@ export class EmployeController {
     return this.employeService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch(':id/active')
   update(@Param('id') id: string, @Body() updateEmployeDto: UpdateEmployeDto) {
     return this.employeService.update(+id, updateEmployeDto);
   }

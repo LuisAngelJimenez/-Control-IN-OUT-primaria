@@ -25,8 +25,8 @@ import { Employe } from './employe/entities/employe.entity';
     database:'alumnos',
     autoLoadEntities:true,
     synchronize: true,
-    entities: [Group, Kid, Tutor],
-}), KidsModule, GroupsModule, TutorsModule],
+    entities: [Group, Kid, Tutor, Recolection, Employe],
+}), KidsModule, GroupsModule, TutorsModule, RecolectionsModule, EmployeModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -41,7 +41,7 @@ export class EmployeService {
         }
       });
       if(!employe){
-        throw new NotFoundError('Producto no encontrado');
+        throw new NotFoundError('Empleado no encontrado');
       }
       return employe;
     }

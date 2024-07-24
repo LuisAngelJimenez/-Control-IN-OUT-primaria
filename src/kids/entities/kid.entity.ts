@@ -1,3 +1,4 @@
+import { Employe } from "src/employe/entities/employe.entity";
 import { Group } from "src/groups/entities/group.entity";
 import { Tutor } from "src/tutors/entities/tutor.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -16,6 +17,7 @@ export class Kid {
     group: Group;
     @ManyToOne(()=>Tutor, tutor => tutor.kid)
     tutor: Tutor;
+
     @Column({ type: 'date' })
     birthdate: Date;
     @Column({

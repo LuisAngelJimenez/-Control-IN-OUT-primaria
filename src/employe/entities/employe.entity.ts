@@ -1,4 +1,5 @@
 import { Kid } from "src/kids/entities/kid.entity";
+import { Recolection } from "src/recolections/entities/recolection.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -29,12 +30,14 @@ export class Employe {
     city: string;
     @Column()
     zip: string;
+    @Column()
+    rols: string
     @Column({default: true})
-    is_active: boolean;
+    
     @Column()
     image?: string;
     //aqui duda 
-    //tambien el el controllers:id/active
-    @OneToMany(()=> Kid, hijos => hijos.tutor)
-    kid: Kid[];
+    is_active:boolean
+    @OneToMany(()=> Recolection, hijos => hijos.tutor)
+    recolection: Recolection[];
 }
