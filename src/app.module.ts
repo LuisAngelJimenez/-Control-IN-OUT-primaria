@@ -25,7 +25,7 @@ import { ConfigModule } from '@nestjs/config';
     synchronize: true,
     entities: [Group, Kid, Tutor],
 }), KidsModule, GroupsModule, TutorsModule, CloudinaryModule,
-    ConfigModule.forRoot({ isGlobal: true})
+    ConfigModule.forRoot({ isGlobal: true}),
 ],
   controllers: [AppController],
   providers: [AppService],
