@@ -1,4 +1,5 @@
 import { Group } from "src/groups/entities/group.entity";
+import { Recolection } from "src/recolections/entities/recolection.entity";
 import { Tutor } from "src/tutors/entities/tutor.entity";
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -14,6 +15,8 @@ export class Kid {
     slastname:string;
     @ManyToOne(()=>Group, group => group.kid)
     group: Group;
+    @OneToMany(()=> Recolection, recolection => recolection.kid)
+    recolection: Recolection[];
     @ManyToMany(() => Tutor, tutor => tutor.kid)
     @JoinTable({
         name: 'kid_tutor',
