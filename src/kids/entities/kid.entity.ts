@@ -1,5 +1,6 @@
 import { Employe } from "src/employe/entities/employe.entity";
 import { Group } from "src/groups/entities/group.entity";
+import { Recolection } from "src/recolections/entities/recolection.entity";
 import { Tutor } from "src/tutors/entities/tutor.entity";
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -15,8 +16,16 @@ export class Kid {
     slastname:string;
     @ManyToOne(()=>Group, group => group.kid)
     group: Group;
-    @ManyToOne(()=>Tutor, tutor => tutor.kid)
-    tutor: Tutor;
+    @OneToMany(()=> Recolection, recolection => recolection.kid)
+    recolection: Recolection[];
+    @ManyToMany(() => Tutor, tutor => tutor.kid)
+    @JoinTable({
+        name: 'kid_tutor',
+        joinColumns: [{ name: 'id_kid' }],
+        inverseJoinColumns: [{ name: 'id_tutor' }],
+    })
+    tutor: Tutor[];
+
     @Column({ type: 'date' })
     birthdate: Date;
     @Column({

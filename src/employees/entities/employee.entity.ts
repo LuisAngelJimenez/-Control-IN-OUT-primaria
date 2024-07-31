@@ -1,9 +1,9 @@
 import { Kid } from "src/kids/entities/kid.entity";
 import { Recolection } from "src/recolections/entities/recolection.entity";
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Tutor {
+export class Employee {
     @PrimaryGeneratedColumn()
     id: number;
     @Column()
@@ -29,18 +29,15 @@ export class Tutor {
     @Column()
     city: string;
     @Column()
-    zip: number;
-    @Column({default: true})
-    is_active: boolean;
+    zip: string;
     @Column()
-    img: string;
-    @OneToMany(()=> Recolection, recolection => recolection.tutor)
+    rols: string
+    @Column({default: true})
+    
+    @Column()
+    image?: string;
+    //aqui duda 
+    is_active:boolean
+    @OneToMany(()=> Recolection, recolection => recolection.employee)
     recolection: Recolection[];
-    @ManyToMany(() => Kid, kid => kid.tutor)
-    @JoinTable({
-        name: 'kid_tutor',
-        joinColumns: [{ name: 'id_tutor' }],
-        inverseJoinColumns: [{ name: 'id_kid' }],
-    })
-    kid: Kid[];
 }

@@ -1,5 +1,6 @@
-import { Employe } from "src/employe/entities/employe.entity";
-import { Group } from "src/groups/entities/group.entity";
+import { Employee } from "src/employees/entities/employee.entity";
+import { Kid } from "src/kids/entities/kid.entity";
+
 import { Tutor } from "src/tutors/entities/tutor.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -14,9 +15,11 @@ export class Recolection {
     @Column()
     time: string;
 
-    @ManyToOne(()=>Group, group => group.kid)
-    group: Group;
-    @ManyToOne(()=>Tutor, tutor => tutor.kid)
+    @ManyToOne(()=>Employee, employee => employee.recolection)
+    employee: Employee;
+    @ManyToOne(()=>Kid, kid => kid.recolection)
+    kid: Kid;
+    @ManyToOne(()=>Tutor, tutor => tutor.recolection)
     tutor: Tutor;
 
     @Column({

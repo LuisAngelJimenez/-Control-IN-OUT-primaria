@@ -7,6 +7,7 @@ import { Recolection } from './entities/recolection.entity';
 @Module({
   controllers: [RecolectionsController],
   providers: [RecolectionsService],
-  imports: [TypeOrmModule.forFeature([Recolection])],
+  imports: [TypeOrmModule.forFeature([Recolection])]
+
 })
 export class RecolectionsModule {}
