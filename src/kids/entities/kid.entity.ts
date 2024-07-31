@@ -1,3 +1,4 @@
+import { Employe } from "src/employe/entities/employe.entity";
 import { Group } from "src/groups/entities/group.entity";
 import { Recolection } from "src/recolections/entities/recolection.entity";
 import { Tutor } from "src/tutors/entities/tutor.entity";
@@ -24,6 +25,7 @@ export class Kid {
         inverseJoinColumns: [{ name: 'id_tutor' }],
     })
     tutor: Tutor[];
+
     @Column({ type: 'date' })
     birthdate: Date;
     @Column({

@@ -31,4 +31,5 @@ export class RecolectionsController {
   remove(@Param('id') id: string) {
     return this.recolectionsService.delete(+id);
   }
+
 }
