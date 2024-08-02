@@ -43,7 +43,7 @@ export class TutorsService {
         }
       });
       if(!tutor){
-        throw new NotFoundException('Producto no encontrado');
+        throw new NotFoundException('Tutor no encontrado');
       }
       return tutor;
     }
