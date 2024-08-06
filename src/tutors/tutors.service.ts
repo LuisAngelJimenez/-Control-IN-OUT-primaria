@@ -37,6 +37,7 @@ export class TutorsService {
 
   async findOne(id: number) {
     try{
+      console.log(id)
       const tutor = await this.tutorRepo.findOne({
         where:{
           id 

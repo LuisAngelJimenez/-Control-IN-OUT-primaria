@@ -33,11 +33,13 @@ export class GroupsService {
 
   async findOne(id: number) {
     try{
+      console.log(typeof id)
       const group = await this.groupRepo.findOne({
         where:{
           id
         }
       });
+      console.log(group)
       if(!group){
         throw new NotFoundException(`Group with id ${id} not found`);
       }

@@ -20,7 +20,9 @@ export class KidsService {
     try{
       const uploadImage = await this.CloudinaryService.uploadFile(file, folder);
       const imageUrl = uploadImage.url;
+      console.log(tutorId)
       const tutor = await this.tutorsService.findOne(tutorId);
+      console.log(tutor.id)
       if (!tutor) {
         throw new Error('Tutor not found');
       }
