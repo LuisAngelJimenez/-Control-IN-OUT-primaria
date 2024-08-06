@@ -20,7 +20,9 @@ export class KidsService {
     try{
       const uploadImage = await this.CloudinaryService.uploadFile(file, folder);
       const imageUrl = uploadImage.url;
+      console.log(tutorId)
       const tutor = await this.tutorsService.findOne(tutorId);
+      console.log(tutor.id)
       if (!tutor) {
         throw new Error('Tutor not found');
       }
@@ -81,11 +83,17 @@ export class KidsService {
 
   async remove(id: number) {
     try{
+      console.log(id)
       const kid = await this.kidRepo.findOne({
+        where: { id },
+        relations: ['tutor'], // Incluye los tutores relacionados
+      });
+      /* const kid = await this.kidRepo.findOne({
         where:{
           id 
         }
-      });
+      }); */
+      console.log(kid);
       if(!kid){
         throw new NotFoundException('Alumno no encontrado');
       }else{
@@ -102,6 +110,7 @@ export class KidsService {
 
   async active(id:number){
     try{
+      
       const kid = await this.kidRepo.findOne({
         where:{
           id 
