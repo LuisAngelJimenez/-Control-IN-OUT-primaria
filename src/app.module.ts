@@ -23,7 +23,7 @@ import { RecolectionsModule } from './recolections/recolections.module';
     port: 3306,
     username:'root',
     password:'',
-    database:'in_out',
+    database:'alumnos',
     autoLoadEntities:true,
     synchronize: true,
     entities: [Group, Kid, Tutor],
