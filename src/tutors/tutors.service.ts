@@ -37,13 +37,14 @@ export class TutorsService {
 
   async findOne(id: number) {
     try{
+      console.log(id)
       const tutor = await this.tutorRepo.findOne({
         where:{
           id 
         }
       });
       if(!tutor){
-        throw new NotFoundException('Producto no encontrado');
+        throw new NotFoundException('Tutor no encontrado');
       }
       return tutor;
     }

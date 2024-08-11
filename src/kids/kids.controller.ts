@@ -12,7 +12,7 @@ export class KidsController {
   @UseInterceptors(FileInterceptor('file'))
   @HttpCode(201)
   create(@Body() createKidDto: CreateKidDto, @Body('folder') folder: string, @UploadedFile(
-    new ParseFilePipe({
+    new ParseFilePipe({ 
       validators: [
         new MaxFileSizeValidator({ maxSize: 1024 * 1024 * 4 }), 
         new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' }), 

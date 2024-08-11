@@ -1,6 +1,7 @@
+import { InjectEntityManager } from "@nestjs/typeorm";
 import { Kid } from "src/kids/entities/kid.entity";
 import { Recolection } from "src/recolections/entities/recolection.entity";
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, EntityManager, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Tutor {
@@ -38,11 +39,13 @@ export class Tutor {
     rol: string;
     @OneToMany(()=> Recolection, recolection => recolection.tutor)
     recolection: Recolection[];
-    @ManyToMany(() => Kid, kid => kid.tutor)
+    /* @ManyToMany(() => Kid, kid => kid.tutor)
     @JoinTable({
         name: 'kid_tutor',
         joinColumns: [{ name: 'id_tutor' }],
         inverseJoinColumns: [{ name: 'id_kid' }],
     })
+    kid: Kid[]; */
+    @ManyToMany(() => Kid, kid => kid.tutor, { onDelete: 'CASCADE'})
     kid: Kid[];
 }
