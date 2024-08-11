@@ -38,4 +38,6 @@ export class CreateTutorDto {
    zip: number
    @IsString()
    img: string
+   @IsString()
+   rol:string;
 }

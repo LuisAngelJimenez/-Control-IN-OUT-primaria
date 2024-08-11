@@ -34,6 +34,8 @@ export class Tutor {
     is_active: boolean;
     @Column()
     img: string;
+    @Column()
+    rol: string;
     @OneToMany(()=> Recolection, recolection => recolection.tutor)
     recolection: Recolection[];
     @ManyToMany(() => Kid, kid => kid.tutor)

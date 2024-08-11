@@ -52,6 +52,7 @@ export class TutorsService {
     }
   }
 
+ 
   async update(id: number, updateTutorDto: UpdateTutorDto) {
     try{
       const tutor = await this.tutorRepo.preload({

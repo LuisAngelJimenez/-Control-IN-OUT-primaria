@@ -16,15 +16,20 @@ export class KidsService {
     private CloudinaryService: CloudinaryService,
     private tutorsService: TutorsService
   ){}
-  async create(createKidDto: CreateKidDto, file: Express.Multer.File, folder: string, tutorId: number) {
+  
+  async create(createKidDto: CreateKidDto, file: Express.Multer.File, folder: string, tutor: number) {
     try{
       const uploadImage = await this.CloudinaryService.uploadFile(file, folder);
       const imageUrl = uploadImage.url;
-      const tutor = await this.tutorsService.findOne(tutorId);
-      if (!tutor) {
+      console.log(createKidDto.tutor);
+      
+      const t = await this.tutorsService.findOne(+createKidDto.tutor);
+      console.log(t);
+      
+      if (!t) {
         throw new Error('Tutor not found');
       }
-      const kid = this.kidRepo.create({ ...createKidDto, img: imageUrl, tutor: [tutor]});
+      const kid = this.kidRepo.create({ ...createKidDto, img: imageUrl, tutor: [t]});
 
       await this.kidRepo.save(kid);
       return kid;

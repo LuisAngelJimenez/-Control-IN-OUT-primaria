@@ -20,6 +20,7 @@ export class KidsController {
     }),
   ) file: Express.Multer.File,
   @Body('tutorId') tutorId?: number) {
+    
     if (!folder) {
       throw new BadRequestException('Folder is required');
     }
